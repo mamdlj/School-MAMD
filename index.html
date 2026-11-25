@@ -1,208 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>School MAMD</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6558e8"><meta name="description" content="دستیار هوشمند برنامه‌ریزی و پیگیری درس‌ها">
+<link rel="manifest" href="./manifest.webmanifest"><title>School MAMD | نسخه ۲</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
-:root{--bg:#f4f6fb;--card:#fff;--text:#172033;--muted:#718096;--line:#e7ebf2;--primary:#635bff;--soft:#efeeff;--green:#159b72;--red:#e05252;--shadow:0 8px 28px #24304a0c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,sans-serif}
-header{background:linear-gradient(120deg,#24205f,#635bff);color:white;padding:26px max(20px,calc((100% - 1150px)/2));}
-header .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-h1{font-size:25px;margin:0 0 5px}header p{margin:0;color:#e1e0ff;font-size:13px}
-.container{max-width:1150px;margin:22px auto;padding:0 18px}
-.profile{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.pill{background:#ffffff20;border:1px solid #ffffff35;border-radius:12px;padding:8px 13px;font-size:13px}
-nav{display:flex;gap:8px;overflow:auto;padding:5px 0 14px}
-nav button{white-space:nowrap;border:1px solid var(--line);background:var(--card);padding:10px 15px;border-radius:12px;color:var(--muted);font:600 13px Vazirmatn;cursor:pointer}
-nav button.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
-.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:var(--shadow)}
-.stat small{color:var(--muted)}.stat strong{display:block;font-size:27px;margin-top:5px}
-.panel{margin-bottom:16px}.panel h2{font-size:17px;margin:0 0 14px}.panel h3{font-size:14px;margin:16px 0 9px}
-.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
-input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--text);font:13px Vazirmatn;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--primary)}
-textarea{min-height:75px;resize:vertical}
-button.primary{background:var(--primary);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:600 13px Vazirmatn;cursor:pointer;margin-top:12px}
-button.ghost{background:var(--soft);color:var(--primary);border:0;border-radius:8px;padding:6px 10px;font:12px Vazirmatn;cursor:pointer}
-button.delete{background:#fff0f0;color:var(--red);border:0;border-radius:8px;padding:6px 9px;font:12px Vazirmatn;cursor:pointer}
-table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}
-.empty{color:var(--muted);font-size:13px;padding:16px;text-align:center;background:#fafbfe;border-radius:10px}
-.tag{display:inline-block;padding:3px 8px;border-radius:20px;background:var(--soft);color:var(--primary);font-size:11px}
-.section{display:none}.section.active{display:block}
-.hint{font-size:12px;color:var(--muted);line-height:1.9}
-.actions{display:flex;gap:6px;align-items:center}
-footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
-@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}header{padding:22px 18px}}
-@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.stat strong{font-size:22px}}
-</style>
-<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#635bff"></head>
+:root{--bg:#f4f6fc;--card:#fff;--text:#172033;--muted:#778198;--line:#e7eaf2;--primary:#6558e8;--soft:#efedff;--green:#159b72;--red:#df555d;--orange:#d88a24;--shadow:0 10px 32px #202b4b0c}
+[data-theme=dark]{--bg:#101522;--card:#192235;--text:#edf1fb;--muted:#a0abc0;--line:#2b354b;--primary:#9288ff;--soft:#292747;--green:#42c69a;--red:#ff777d;--orange:#f2b65c;--shadow:0 10px 32px #0003}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,sans-serif;transition:.2s}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{background:linear-gradient(120deg,#24205f,#6558e8);color:#fff;padding:22px max(18px,calc((100% - 1180px)/2));}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}h1{font-size:24px;margin:0}header p{margin:4px 0 0;color:#e3e0ff;font-size:12px}
+.header-actions{display:flex;gap:8px;align-items:center}.pill{background:#ffffff20;border:1px solid #ffffff35;border-radius:12px;padding:7px 11px;font-size:12px}
+.wrap{max-width:1180px;margin:20px auto;padding:0 16px}.profileline{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+nav{display:flex;gap:7px;overflow:auto;padding:4px 0 14px;scrollbar-width:thin}nav button{white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:12px;padding:9px 13px;font-size:12px;font-weight:700}nav button.active{background:var(--primary);color:white;border-color:var(--primary)}
+.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+.stat small{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:26px;margin-top:4px}.panel h2{font-size:16px;margin:0 0 13px}.panel h3{font-size:13px;margin:16px 0 8px}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+label{display:block;color:var(--muted);font-size:11px;margin:0 0 5px}input,select,textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);outline:none;font-size:12px}input:focus,select:focus,textarea:focus{border-color:var(--primary)}textarea{min-height:68px;resize:vertical}
+.btn{border:0;border-radius:10px;padding:9px 14px;font-size:12px;font-weight:700}.primary{background:var(--primary);color:#fff}.soft{background:var(--soft);color:var(--primary)}.danger{background:#ffecee;color:#bd3942}.success{background:#e4f7ef;color:#087b58}.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}.hint{color:var(--muted);font-size:11px;line-height:1.9}.empty{padding:15px;border-radius:11px;background:var(--bg);color:var(--muted);font-size:12px;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:11px;min-width:540px}th,td{text-align:right;padding:9px 7px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}.tablewrap{overflow:auto}.tag{display:inline-block;padding:3px 8px;border-radius:30px;background:var(--soft);color:var(--primary);font-size:10px}.good{color:var(--green)}.bad{color:var(--red)}
+.bar{height:9px;background:var(--line);border-radius:20px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--primary);border-radius:20px}
+.subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.subject{padding:11px;border:1px solid var(--line);border-radius:12px}.subject b{font-size:12px}.subject small{display:block;color:var(--muted);font-size:10px;margin:4px 0}
+footer{text-align:center;color:var(--muted);font-size:10px;padding:18px}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#20263a;color:white;padding:10px 16px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:20}#toast.show{opacity:1}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.row3{grid-template-columns:1fr 1fr}.wrap{margin-top:12px}header{padding:19px 16px}}
+@media(max-width:450px){.row,.row3{grid-template-columns:1fr}.stat strong{font-size:22px}.subjects{grid-template-columns:1fr}}
+@media print{header,nav,.no-print,footer{display:none!important}body{background:#fff;color:#111}.wrap{max-width:none;margin:0;padding:0}.page{display:none!important}#grades.page{display:block!important}.panel,.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}}
+</style></head>
 <body>
-<header>
- <div class="top"><div><h1>School MAMD</h1><p>دستیار برنامه‌ریزی درسی و پیگیری پیشرفت تحصیلی</p></div><span class="pill" id="today"></span></div>
- <div class="profile"><span class="pill" id="profileName">دانش‌آموز</span><span class="pill" id="profileClass">پایه هشتم</span><span class="pill" id="profileYear">سال تحصیلی ۱۴۰۵–۱۴۰۶</span></div>
-</header>
-<main class="container">
-<nav id="nav">
- <button class="active" data-tab="home">خانه</button><button data-tab="timetable">برنامه کلاسی</button><button data-tab="exams">امتحان‌ها</button><button data-tab="grades">نمره‌ها و کارنامه</button><button data-tab="profile">اطلاعات من</button>
-</nav>
-<section class="section active" id="home">
- <div class="grid">
-  <div class="card stat"><small>امتحان‌های ثبت‌شده</small><strong id="examCount">۰</strong></div>
-  <div class="card stat"><small>نمره‌های ثبت‌شده</small><strong id="gradeCount">۰</strong></div>
-  <div class="card stat"><small>میانگین نمره‌ها</small><strong id="average">—</strong></div>
- </div>
- <div class="panel"><h2>نمودار پیشرفت نمرات</h2>
- <p class="hint">میانگین نمره‌های هر ماه؛ با ثبت نمره‌های جدید، نمودار خودکار به‌روز می‌شود.</p>
- <div style="height:250px;position:relative"><canvas id="gradeChart" aria-label="نمودار میانگین نمرات ماهانه"></canvas></div>
- <div id="chartEmpty" class="empty" style="display:none">برای نمایش نمودار، ابتدا چند نمره ثبت کن.</div>
- </div>
- <div class="panel"><h2>برنامه امروز</h2><div id="todayClasses" class="empty">هنوز برنامه کلاسی ثبت نکرده‌ای.</div></div>
- <div class="panel"><h2>امتحان‌های پیشِ رو</h2><div id="upcomingExams" class="empty">امتحانی ثبت نشده است.</div></div>
- <p class="hint">برای شروع، از بخش «اطلاعات من» مشخصاتت را وارد کن؛ بعد برنامه هفتگی، امتحان‌ها و نمره‌هایت را ثبت کن.</p>
+<header><div class="top"><div><h1>School MAMD <span style="font-size:12px;opacity:.8">نسخه ۲</span></h1><p>همراه هوشمند درس، امتحان و پیشرفت تحصیلی</p></div><div class="header-actions"><span class="pill" id="todayLabel"></span><button class="btn soft" id="themeBtn">🌙 حالت شب</button></div></div><div class="profileline"><span class="pill" id="headName">دانش‌آموز</span><span class="pill" id="headClass">پایه هشتم</span><span class="pill" id="headYear">۱۴۰۵–۱۴۰۶</span></div></header>
+<main class="wrap">
+<nav id="nav"><button class="active" data-page="home">🏠 خانه</button><button data-page="timetable">📚 برنامه هفتگی</button><button data-page="exams">📝 امتحان‌ها</button><button data-page="grades">📊 نمره و کارنامه</button><button data-page="tasks">✅ تکالیف</button><button data-page="calendar">📅 تقویم</button><button data-page="settings">⚙️ تنظیمات</button></nav>
+<section class="page active" id="home">
+<div class="grid"><div class="card stat"><small>میانگین کل</small><strong id="avgAll">—</strong></div><div class="card stat"><small>امتحان‌های پیش‌رو</small><strong id="examTotal">۰</strong></div><div class="card stat"><small>تکالیف باز</small><strong id="taskOpen">۰</strong></div><div class="card stat"><small>نمره‌های ثبت‌شده</small><strong id="gradeTotal">۰</strong></div></div>
+<div class="panel"><h2>نمای کلی پیشرفت درسی</h2><div id="subjectProgress" class="subjects"><div class="empty">برای دیدن پیشرفت، نمره ثبت کن.</div></div></div>
+<div class="row"><div class="panel"><h2>کلاس‌های امروز</h2><div id="todayLessons" class="empty">برنامه‌ای برای امروز ثبت نشده.</div></div><div class="panel"><h2>نزدیک‌ترین امتحان</h2><div id="nextExam" class="empty">امتحانی ثبت نشده.</div></div></div>
+<div class="panel"><h2>تکالیف و کارهای نزدیک</h2><div id="homeTasks" class="empty">تکلیف بازی نداری.</div></div>
 </section>
-<section class="section" id="timetable">
- <div class="panel"><h2>افزودن زنگ به برنامه کلاسی</h2>
-  <div class="row">
-   <div><label>روز هفته</label><select id="ttDay"><option>شنبه</option><option>یکشنبه</option><option>دوشنبه</option><option>سه‌شنبه</option><option>چهارشنبه</option><option>پنجشنبه</option><option>جمعه</option></select></div>
-   <div><label>زنگ / ساعت</label><input id="ttTime" placeholder="مثلاً زنگ اول یا ۸:۰۰"></div>
-   <div><label>نام درس</label><input id="ttSubject" placeholder="مثلاً ریاضی"></div>
-   <div><label>نام دبیر (اختیاری)</label><input id="ttTeacher" placeholder="نام دبیر"></div>
-  </div><button class="primary" onclick="addTimetable()">افزودن به برنامه</button>
- </div>
- <div class="panel"><h2>برنامه هفتگی من</h2><div id="timetableList"></div></div>
-</section>
-<section class="section" id="exams">
- <div class="panel"><h2>ثبت امتحان یا آزمون</h2>
-  <div class="row">
-   <div><label>نام درس</label><input id="exSubject" placeholder="مثلاً علوم"></div>
-   <div><label>نوع امتحان</label><select id="exType"><option>امتحان مستمر</option><option>امتحان ماهانه</option><option>امتحان نوبت اول</option><option>امتحان نوبت دوم</option><option>آزمون کلاسی</option><option>امتحان پایانی</option></select></div>
-   <div><label>تاریخ امتحان</label><input id="exDate" type="date"></div>
-   <div><label>محدوده امتحان / توضیحات</label><input id="exNote" placeholder="مثلاً درس ۱ تا ۴"></div>
-  </div><button class="primary" onclick="addExam()">ثبت امتحان</button>
-  <p class="hint">می‌توانی برنامه امتحانی مدرسه را هم درس‌به‌درس در همین قسمت وارد کنی.</p>
- </div>
- <div class="panel"><h2>فهرست امتحان‌ها</h2><div id="examList"></div></div>
-</section>
-<section class="section" id="grades">
- <div class="panel"><h2>ثبت نمره و کارنامه ماهانه</h2>
-  <div class="row">
-   <div><label>ماه</label><select id="grMonth"><option>مهر</option><option>آبان</option><option>آذر</option><option>دی</option><option>بهمن</option><option>اسفند</option><option>فروردین</option><option>اردیبهشت</option><option>خرداد</option></select></div>
-   <div><label>نام درس</label><input id="grSubject" placeholder="مثلاً فارسی"></div>
-   <div><label>نوع نمره</label><select id="grType"><option>مستمر</option><option>ماهانه</option><option>نوبت اول</option><option>نوبت دوم</option><option>پایانی</option></select></div>
-   <div><label>نمره از ۲۰</label><input id="grScore" type="number" min="0" max="20" step="0.25" placeholder="مثلاً ۱۸٫۵"></div>
-  </div><button class="primary" onclick="addGrade()">ثبت نمره</button>
- </div>
- <div class="panel"><h2>کارنامه من</h2><div class="row" style="margin-bottom:12px"><div><label>نمایش ماه</label><select id="filterMonth" onchange="renderGrades()"><option value="همه">همه ماه‌ها</option><option>مهر</option><option>آبان</option><option>آذر</option><option>دی</option><option>بهمن</option><option>اسفند</option><option>فروردین</option><option>اردیبهشت</option><option>خرداد</option></select></div></div><div id="gradeList"></div></div>
- <div class="panel"><h2>وضعیت قبولی</h2><div class="row"><div><label>نتیجه سال تحصیلی</label><select id="passStatus" onchange="saveProfile()"><option>هنوز مشخص نیست</option><option>قبول شدم</option><option>نیاز به تلاش بیشتر / تجدید</option></select></div><div><label>توضیحات</label><input id="passNote" placeholder="مثلاً منتظر اعلام نتیجه هستم" onchange="saveProfile()"></div></div></div>
-</section>
-<section class="section" id="profile">
- <div class="panel"><h2>اطلاعات دانش‌آموز</h2>
-  <div class="row">
-   <div><label>نام و نام خانوادگی</label><input id="pName" placeholder="نام خودت"></div>
-   <div><label>پایه تحصیلی</label><select id="pClass"><option>هفتم</option><option selected>هشتم</option><option>نهم</option><option>دهم</option><option>یازدهم</option><option>دوازدهم</option></select></div>
-   <div><label>کلاس / شماره کلاس</label><input id="pRoom" placeholder="مثلاً ۸/۲"></div>
-   <div><label>سال تحصیلی</label><input id="pYear" value="۱۴۰۵-۱۴۰۶"></div>
-  </div><button class="primary" onclick="saveProfile()">ذخیره اطلاعات</button>
-  <p class="hint">اطلاعات و نمره‌ها در همین مرورگر و روی همین دستگاه ذخیره می‌شوند؛ فعلاً حساب کاربری یا همگام‌سازی اینترنتی ندارد.</p>
- </div>
- <div class="panel"><h2>مدیریت اطلاعات</h2><button class="ghost" onclick="exportData()">دریافت نسخه پشتیبان (JSON)</button> <button class="delete" onclick="clearAll()">پاک‌کردن همه اطلاعات</button></div>
-</section>
-<footer>School MAMD · نسخه آزمایشی ۱.۱ · School MAMD</footer>
-</main>
+<section class="page" id="timetable"><div class="panel"><h2>افزودن زنگ به برنامه هفتگی</h2><div class="row3"><div><label>روز</label><select id="ttDay"><option>شنبه</option><option>یکشنبه</option><option>دوشنبه</option><option>سه‌شنبه</option><option>چهارشنبه</option><option>پنجشنبه</option><option>جمعه</option></select></div><div><label>ساعت یا زنگ</label><input id="ttTime" placeholder="مثلاً ۸:۰۰ یا زنگ اول"></div><div><label>درس</label><input id="ttSubject" placeholder="ریاضی"></div><div><label>دبیر (اختیاری)</label><input id="ttTeacher" placeholder="نام دبیر"></div><div><label>کلاس/مکان (اختیاری)</label><input id="ttRoom" placeholder="کلاس ۸/۲"></div></div><button class="btn primary actions" onclick="addTT()">افزودن به برنامه</button></div><div class="panel"><h2>برنامه هفتگی</h2><div id="ttList"></div></div></section>
+<section class="page" id="exams"><div class="panel"><h2>ثبت امتحان</h2><div class="row3"><div><label>نام درس</label><input id="exSubject" placeholder="علوم"></div><div><label>نوع</label><select id="exType"><option>امتحان مستمر</option><option>آزمون کلاسی</option><option>امتحان ماهانه</option><option>نوبت اول</option><option>نوبت دوم</option><option>پایانی</option></select></div><div><label>تاریخ</label><input id="exDate" type="date"></div><div><label>ساعت (اختیاری)</label><input id="exTime" type="time"></div><div><label>محدوده</label><input id="exNote" placeholder="درس ۱ تا ۴"></div></div><button class="btn primary actions" onclick="addExam()">ثبت امتحان</button></div><div class="panel"><h2>فهرست امتحان‌ها و شمارش معکوس</h2><div id="examList"></div></div></section>
+<section class="page" id="grades"><div class="panel"><h2>ثبت نمره</h2><div class="row3"><div><label>ماه</label><select id="grMonth"><option>مهر</option><option>آبان</option><option>آذر</option><option>دی</option><option>بهمن</option><option>اسفند</option><option>فروردین</option><option>اردیبهشت</option><option>خرداد</option></select></div><div><label>درس</label><input id="grSubject" placeholder="ریاضی"></div><div><label>نوع نمره</label><select id="grType"><option>مستمر</option><option>ماهانه</option><option>کلاسی</option><option>نوبت اول</option><option>نوبت دوم</option><option>پایانی</option></select></div><div><label>نمره از ۲۰</label><input id="grScore" type="number" min="0" max="20" step=".25" placeholder="۱۹"></div></div><button class="btn primary actions" onclick="addGrade()">ثبت نمره</button></div><div class="panel"><div class="top"><h2>کارنامه و گزارش ماهانه</h2><div class="actions no-print"><select id="gradeFilter" onchange="renderGrades()" style="width:auto"><option value="همه">همه ماه‌ها</option><option>مهر</option><option>آبان</option><option>آذر</option><option>دی</option><option>بهمن</option><option>اسفند</option><option>فروردین</option><option>اردیبهشت</option><option>خرداد</option></select><button class="btn soft" onclick="window.print()">چاپ / ذخیره PDF</button></div></div><div id="gradeList"></div><h3>میانگین هر درس</h3><div id="gradeSubjects" class="subjects"></div></div></section>
+<section class="page" id="tasks"><div class="panel"><h2>افزودن تکلیف یا کار درسی</h2><div class="row3"><div><label>عنوان تکلیف</label><input id="taskTitle" placeholder="حل تمرین صفحه ۴۵"></div><div><label>درس</label><input id="taskSubject" placeholder="ریاضی"></div><div><label>مهلت انجام</label><input id="taskDue" type="date"></div></div><div style="margin-top:10px"><label>توضیحات (اختیاری)</label><textarea id="taskNote" placeholder="توضیحات تکلیف..."></textarea></div><button class="btn primary actions" onclick="addTask()">ثبت تکلیف</button></div><div class="panel"><h2>فهرست تکالیف</h2><div id="taskList"></div></div></section>
+<section class="page" id="calendar"><div class="panel"><h2>تقویم رویدادها</h2><p class="hint">امتحان‌ها و مهلت تکالیف ثبت‌شده در این بخش کنار هم نمایش داده می‌شوند.</p><div id="calendarList"></div></div></section>
+<section class="page" id="settings"><div class="panel"><h2>پروفایل دانش‌آموز</h2><div class="row3"><div><label>نام و نام خانوادگی</label><input id="pName" placeholder="نام دانش‌آموز"></div><div><label>پایه</label><select id="pClass"><option>هفتم</option><option selected>هشتم</option><option>نهم</option><option>دهم</option><option>یازدهم</option><option>دوازدهم</option></select></div><div><label>کلاس</label><input id="pRoom" placeholder="مثلاً ۸/۲"></div><div><label>سال تحصیلی</label><input id="pYear" value="۱۴۰۵-۱۴۰۶"></div></div><button class="btn primary actions" onclick="saveProfile()">ذخیره پروفایل</button></div>
+<div class="panel"><h2>اعلان‌ها و یادآوری</h2><p class="hint">در صورت پشتیبانی مرورگر، اجازه اعلان را فعال کن. یادآوری خودکار در زمان بسته بودن مرورگر تضمین‌شده نیست.</p><button class="btn soft" onclick="enableNotifications()">فعال‌سازی اعلان مرورگر</button></div>
+<div class="panel"><h2>پشتیبان‌گیری و بازیابی</h2><div class="actions no-print"><button class="btn soft" onclick="backup()">دانلود نسخه پشتیبان</button><label class="btn soft" style="margin:0">بازیابی از فایل<input type="file" accept="application/json" id="restoreFile" hidden onchange="restoreBackup(event)"></label></div><p class="hint">فایل پشتیبان شامل پروفایل، برنامه هفتگی، امتحان‌ها، نمره‌ها و تکالیف است.</p></div>
+<div class="panel"><h2>وضعیت قبولی و نتیجه سال</h2><div class="row"><div><label>وضعیت</label><select id="passStatus" onchange="savePass()"><option>هنوز مشخص نیست</option><option>قبول شدم</option><option>نیاز به تلاش بیشتر / تجدید</option></select></div><div><label>یادداشت</label><input id="passNote" placeholder="یادداشت شخصی" onchange="savePass()"></div></div></div>
+<div class="panel"><h2>حریم خصوصی و ذخیره‌سازی</h2><p class="hint">این نسخه اطلاعات را روی همین مرورگر و دستگاه ذخیره می‌کند. ورود چنددستگاهی و همگام‌سازی ابری واقعی هنوز فعال نیست و برای آن باید سرویس امن و تنظیمات اختصاصی مالک پروژه اضافه شود. برای جابه‌جایی دستگاه از نسخه پشتیبان استفاده کن.</p><button class="btn danger" onclick="clearAll()">پاک‌کردن همه اطلاعات این دستگاه</button></div></section>
+<footer>School MAMD v2 · ساخته‌شده برای برنامه‌ریزی بهتر</footer></main><div id="toast"></div>
 <script>
-const KEY='schoolBuddy_v1';
-let data=JSON.parse(localStorage.getItem(KEY)||'{"profile":{"name":"","class":"هشتم","room":"","year":"۱۴۰۵-۱۴۰۶","pass":"هنوز مشخص نیست","passNote":""},"timetable":[],"exams":[],"grades":[]}');
-const $=id=>document.getElementById(id);
-const fa=n=>new Intl.NumberFormat('fa-IR',{maximumFractionDigits:2}).format(n);
-function save(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
-function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function saveProfile(){
- data.profile={...data.profile,name:$('pName').value,class:$('pClass').value,room:$('pRoom').value,year:$('pYear').value,pass:$('passStatus').value,passNote:$('passNote').value};
- save();
-}
-function addTimetable(){
- let item={day:$('ttDay').value,time:$('ttTime').value.trim(),subject:$('ttSubject').value.trim(),teacher:$('ttTeacher').value.trim()};
- if(!item.subject||!item.time)return alert('روز، ساعت و نام درس را وارد کن.');
- data.timetable.push(item);['ttTime','ttSubject','ttTeacher'].forEach(x=>$(x).value='');save();
-}
-function addExam(){
- let item={subject:$('exSubject').value.trim(),type:$('exType').value,date:$('exDate').value,note:$('exNote').value.trim()};
- if(!item.subject||!item.date)return alert('نام درس و تاریخ امتحان را وارد کن.');
- data.exams.push(item);['exSubject','exDate','exNote'].forEach(x=>$(x).value='');save();
-}
-function addGrade(){
- let score=Number($('grScore').value),subject=$('grSubject').value.trim();
- if(!subject||$('grScore').value===''||score<0||score>20)return alert('نام درس و نمره‌ای بین صفر تا ۲۰ وارد کن.');
- data.grades.push({month:$('grMonth').value,subject,type:$('grType').value,score});
- $('grSubject').value='';$('grScore').value='';save();
-}
-function removeItem(type,index){if(!confirm('این مورد حذف شود؟'))return;data[type].splice(index,1);save()}
-function table(headers,rows){if(!rows.length)return '<div class="empty">هنوز موردی ثبت نشده است.</div>';return '<div style="overflow:auto"><table><thead><tr>'+headers.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>'}
-function renderTimetable(){
- const days=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
- let rows=data.timetable.map((x,i)=>({x,i})).sort((a,b)=>days.indexOf(a.x.day)-days.indexOf(b.x.day)||a.x.time.localeCompare(b.x.time,'fa'));
- $('timetableList').innerHTML=table(['روز','ساعت','درس','دبیر',''],rows.map(({x,i})=>`<tr><td>${escapeHTML(x.day)}</td><td>${escapeHTML(x.time)}</td><td>${escapeHTML(x.subject)}</td><td>${escapeHTML(x.teacher||'—')}</td><td><button class="delete" onclick="removeItem('timetable',${i})">حذف</button></td></tr>`));
- let today=new Intl.DateTimeFormat('fa-IR',{weekday:'long'}).format(new Date()).replace('ی','ي');
- let found=data.timetable.filter(x=>x.day===today||x.day===today.replace('ي','ی'));
- $('todayClasses').innerHTML=found.length?found.map(x=>`<div style="padding:8px;border-bottom:1px solid var(--line)"><b>${escapeHTML(x.time)}</b> · ${escapeHTML(x.subject)}</div>`).join(''):'برای امروز برنامه‌ای ثبت نشده است.';
-}
-function renderExams(){
- $('examList').innerHTML=table(['تاریخ','درس','نوع','توضیحات',''],data.exams.map((x,i)=>`<tr><td>${escapeHTML(x.date)}</td><td>${escapeHTML(x.subject)}</td><td><span class="tag">${escapeHTML(x.type)}</span></td><td>${escapeHTML(x.note||'—')}</td><td><button class="delete" onclick="removeItem('exams',${i})">حذف</button></td></tr>`));
- let upcoming=data.exams.filter(x=>x.date>=new Date().toISOString().slice(0,10)).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5);
- $('upcomingExams').innerHTML=upcoming.length?upcoming.map(x=>`<div style="padding:8px;border-bottom:1px solid var(--line)"><b>${escapeHTML(x.date)}</b> · ${escapeHTML(x.subject)} <span class="tag">${escapeHTML(x.type)}</span></div>`).join(''):'امتحان آینده‌ای ثبت نشده است.';
-}
-
-function drawGradeChart(){
- const canvas=$('gradeChart'), empty=$('chartEmpty'); if(!canvas)return;
- const months=['مهر','آبان','آذر','دی','بهمن','اسفند','فروردین','اردیبهشت','خرداد'];
- const values=months.map(m=>{const a=data.grades.filter(g=>g.month===m);return a.length?a.reduce((s,g)=>s+Number(g.score),0)/a.length:null;});
- const has=values.some(v=>v!==null);canvas.style.display=has?'block':'none';empty.style.display=has?'none':'block';if(!has)return;
- const w=Math.max(300,canvas.parentElement.clientWidth),h=250,dpr=window.devicePixelRatio||1;
- canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width='100%';canvas.style.height=h+'px';
- const c=canvas.getContext('2d');c.scale(dpr,dpr);c.clearRect(0,0,w,h);
- const pad={l:32,r:10,t:18,b:38},cw=w-pad.l-pad.r,ch=h-pad.t-pad.b;
- c.font='11px Vazirmatn, sans-serif';c.textAlign='right';c.textBaseline='middle';
- for(let v=0;v<=20;v+=5){const y=pad.t+ch-(v/20)*ch;c.strokeStyle='#e8ebf3';c.beginPath();c.moveTo(pad.l,y);c.lineTo(w-pad.r,y);c.stroke();c.fillStyle='#8290a5';c.fillText(String(v),pad.l-7,y);}
- const pts=values.map((v,i)=>v===null?null:{x:pad.l+i/(months.length-1)*cw,y:pad.t+ch-(v/20)*ch,v});
- c.strokeStyle='#635bff';c.lineWidth=3;c.lineJoin='round';c.lineCap='round';c.beginPath();let started=false;
- pts.forEach(p=>{if(!p){started=false;return;}if(!started){c.moveTo(p.x,p.y);started=true;}else c.lineTo(p.x,p.y);});c.stroke();
- pts.forEach(p=>{if(!p)return;c.fillStyle='#635bff';c.beginPath();c.arc(p.x,p.y,4,0,Math.PI*2);c.fill();c.fillStyle='#4c48b8';c.textAlign='center';c.fillText(p.v.toFixed(1),p.x,p.y-13);});
- c.fillStyle='#758197';c.textAlign='center';c.textBaseline='top';months.forEach((m,i)=>c.fillText(m,pad.l+i/(months.length-1)*cw,h-27));
-}
-window.addEventListener('resize',()=>drawGradeChart());
-
-function renderGrades(){
- let month=$('filterMonth')?.value||'همه';
- let arr=data.grades.map((x,i)=>({...x,i})).filter(x=>month==='همه'||x.month===month);
- $('gradeList').innerHTML=table(['ماه','درس','نوع نمره','نمره از ۲۰',''],arr.map(x=>`<tr><td>${escapeHTML(x.month)}</td><td>${escapeHTML(x.subject)}</td><td>${escapeHTML(x.type)}</td><td><b>${fa(x.score)}</b></td><td><button class="delete" onclick="removeItem('grades',${x.i})">حذف</button></td></tr>`));
- $('gradeCount').textContent=fa(data.grades.length);
- $('average').textContent=data.grades.length?fa(data.grades.reduce((s,x)=>s+x.score,0)/data.grades.length):'—'; drawGradeChart();
-}
-function renderAll(){
- $('profileName').textContent=data.profile.name||'دانش‌آموز';
- $('profileClass').textContent='پایه '+data.profile.class+(data.profile.room?' · کلاس '+data.profile.room:'');
- $('profileYear').textContent='سال تحصیلی '+data.profile.year;
- $('examCount').textContent=fa(data.exams.length);
- renderTimetable();renderExams();renderGrades();
-}
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{
- document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
- document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
- b.classList.add('active');$(''+b.dataset.tab).classList.add('active');
-}));
-function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='school-buddy-backup.json';a.click();URL.revokeObjectURL(a.href)}
-function clearAll(){if(confirm('همه برنامه‌ها، امتحان‌ها و نمره‌ها پاک شوند؟')){localStorage.removeItem(KEY);location.reload()}}
-$('today').textContent=new Intl.DateTimeFormat('fa-IR',{dateStyle:'full'}).format(new Date());
-$('pName').value=data.profile.name||'';$('pClass').value=data.profile.class||'هشتم';$('pRoom').value=data.profile.room||'';$('pYear').value=data.profile.year||'۱۴۰۵-۱۴۰۶';$('passStatus').value=data.profile.pass||'هنوز مشخص نیست';$('passNote').value=data.profile.passNote||'';
-renderAll();
-</script>
-<script>
-if ('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')) {
- window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-}
-</script></body>
-</html>
+const KEY='school_mamd_v2';
+const defaults={profile:{name:'',cls:'هشتم',room:'',year:'۱۴۰۵-۱۴۰۶',pass:'هنوز مشخص نیست',passNote:''},timetable:[],exams:[],grades:[],tasks:[],theme:'light'};
+let db;try{db=JSON.parse(localStorage.getItem(KEY))||defaults}catch{db=defaults}
+db={...defaults,...db,profile:{...defaults.profile,...(db.profile||{})},timetable:db.timetable||[],exams:db.exams||[],grades:db.grades||[],tasks:db.tasks||[]};
+const $=id=>document.getElementById(id), fa=n=>new Intl.NumberFormat('fa-IR',{maximumFractionDigits:2}).format(n);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const days=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+function persist(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2300)}
+function todayISO(){let d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id))}
+$('nav').addEventListener('click',e=>{let b=e.target.closest('button[data-page]');if(b)showPage(b.dataset.page)});
+function addTT(){let x={day:$('ttDay').value,time:$('ttTime').value.trim(),subject:$('ttSubject').value.trim(),teacher:$('ttTeacher').value.trim(),room:$('ttRoom').value.trim()};if(!x.time||!x.subject)return toast('ساعت و نام درس را وارد کن.');db.timetable.push(x);['ttTime','ttSubject','ttTeacher','ttRoom'].forEach(id=>$(id).value='');persist();toast('به برنامه اضافه شد.')}
+function addExam(){let x={subject:$('exSubject').value.trim(),type:$('exType').value,date:$('exDate').value,time:$('exTime').value,note:$('exNote').value.trim()};if(!x.subject||!x.date)return toast('نام درس و تاریخ را وارد کن.');db.exams.push(x);['exSubject','exDate','exTime','exNote'].forEach(id=>$(id).value='');persist();toast('امتحان ثبت شد.')}
+function addGrade(){let score=Number($('grScore').value),subject=$('grSubject').value.trim();if(!subject||$('grScore').value===''||score<0||score>20)return toast('درس و نمره بین صفر تا ۲۰ لازم است.');db.grades.push({month:$('grMonth').value,subject,type:$('grType').value,score});$('grSubject').value='';$('grScore').value='';persist();toast('نمره ذخیره شد.')}
+function addTask(){let x={title:$('taskTitle').value.trim(),subject:$('taskSubject').value.trim(),due:$('taskDue').value,note:$('taskNote').value.trim(),done:false};if(!x.title)return toast('عنوان تکلیف را بنویس.');db.tasks.push(x);['taskTitle','taskSubject','taskDue','taskNote'].forEach(id=>$(id).value='');persist();toast('تکلیف ثبت شد.')}
+function del(type,i){if(!confirm('این مورد حذف شود؟'))return;db[type].splice(i,1);persist()}
+function toggleTask(i){db.tasks[i].done=!db.tasks[i].done;persist()}
+function saveProfile(){db.profile={...db.profile,name:$('pName').value.trim(),cls:$('pClass').value,room:$('pRoom').value.trim(),year:$('pYear').value.trim()};persist();toast('پروفایل ذخیره شد.')}
+function savePass(){db.profile.pass=$('passStatus').value;db.profile.passNote=$('passNote').value;persist()}
+function table(headers,rows){if(!rows.length)return '<div class="empty">هنوز موردی ثبت نشده است.</div>';return '<div class="tablewrap"><table><thead><tr>'+headers.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>'}
+function renderTT(){let sorted=db.timetable.map((x,i)=>({...x,i})).sort((a,b)=>days.indexOf(a.day)-days.indexOf(b.day)||a.time.localeCompare(b.time));$('ttList').innerHTML=table(['روز','ساعت','درس','دبیر','کلاس',''],sorted.map(x=>`<tr><td>${esc(x.day)}</td><td>${esc(x.time)}</td><td>${esc(x.subject)}</td><td>${esc(x.teacher||'—')}</td><td>${esc(x.room||'—')}</td><td><button class="btn danger" onclick="del('timetable',${x.i})">حذف</button></td></tr>`));let weekday=new Intl.DateTimeFormat('fa-IR',{weekday:'long'}).format(new Date());let matches=db.timetable.filter(x=>x.day===weekday);$('todayLessons').innerHTML=matches.length?matches.sort((a,b)=>a.time.localeCompare(b.time)).map(x=>`<p><b>${esc(x.time)}</b> · ${esc(x.subject)}</p>`).join(''):'برای امروز برنامه‌ای ثبت نشده.'}
+function countdown(date){let a=new Date(todayISO()+'T00:00:00'),b=new Date(date+'T00:00:00');return Math.round((b-a)/86400000)}
+function renderExams(){let arr=db.exams.map((x,i)=>({...x,i})).sort((a,b)=>a.date.localeCompare(b.date));$('examList').innerHTML=table(['تاریخ','زمان','درس','نوع','زمان باقی‌مانده','محدوده',''],arr.map(x=>{let d=countdown(x.date),label=d<0?'گذشته':d===0?'امروز':`${fa(d)} روز`;return `<tr><td>${esc(x.date)}</td><td>${esc(x.time||'—')}</td><td>${esc(x.subject)}</td><td>${esc(x.type)}</td><td class="${d>=0?'good':'bad'}">${label}</td><td>${esc(x.note||'—')}</td><td><button class="btn danger" onclick="del('exams',${x.i})">حذف</button></td></tr>`}));let next=arr.find(x=>countdown(x.date)>=0);$('nextExam').innerHTML=next?`<b>${esc(next.subject)}</b><p class="hint">${esc(next.date)} · ${esc(next.type)}</p><h2 class="good">${countdown(next.date)===0?'امروز!':` ${fa(countdown(next.date))} روز مانده`}</h2>`:'امتحان آینده‌ای ثبت نشده.'}
+function renderGrades(){let f=$('gradeFilter')?.value||'همه',arr=db.grades.map((x,i)=>({...x,i})).filter(x=>f==='همه'||x.month===f);$('gradeList').innerHTML=table(['ماه','درس','نوع','نمره',''],arr.map(x=>`<tr><td>${esc(x.month)}</td><td>${esc(x.subject)}</td><td>${esc(x.type)}</td><td><b>${fa(x.score)}</b></td><td><button class="btn danger" onclick="del('grades',${x.i})">حذف</button></td></tr>`));let names=[...new Set(db.grades.map(x=>x.subject))];$('gradeSubjects').innerHTML=names.length?names.map(n=>{let a=db.grades.filter(x=>x.subject===n),v=a.reduce((s,x)=>s+Number(x.score),0)/a.length;return `<div class="subject"><b>${esc(n)}</b><small>میانگین ${fa(v)} از ۲۰ · ${fa(a.length)} نمره</small><div class="bar"><i style="width:${Math.max(0,Math.min(100,v*5))}%"></i></div></div>`}).join(''):'<div class="empty">نمره‌ای ثبت نشده.</div>'}
+function renderTasks(){let arr=db.tasks.map((x,i)=>({...x,i}));$('taskList').innerHTML=table(['وضعیت','عنوان','درس','مهلت','توضیحات',''],arr.map(x=>`<tr><td><button class="btn ${x.done?'success':'soft'}" onclick="toggleTask(${x.i})">${x.done?'انجام شد':'باز'}</button></td><td>${esc(x.title)}</td><td>${esc(x.subject||'—')}</td><td>${esc(x.due||'—')}</td><td>${esc(x.note||'—')}</td><td><button class="btn danger" onclick="del('tasks',${x.i})">حذف</button></td></tr>`));let open=arr.filter(x=>!x.done).sort((a,b)=>(a.due||'9999').localeCompare(b.due||'9999')).slice(0,5);$('homeTasks').innerHTML=open.length?open.map(x=>`<p>◦ ${esc(x.title)} ${x.due?'· '+esc(x.due):''}</p>`).join(''):'تکلیف بازی نداری.'}
+function renderCalendar(){let events=[...db.exams.map(x=>({date:x.date,title:'امتحان '+x.subject,kind:'امتحان'})),...db.tasks.filter(x=>!x.done&&x.due).map(x=>({date:x.due,title:'مهلت '+x.title,kind:'تکلیف'}))].sort((a,b)=>a.date.localeCompare(b.date));$('calendarList').innerHTML=events.length?table(['تاریخ','رویداد','نوع'],events.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.title)}</td><td><span class="tag">${x.kind}</span></td></tr>`)):'رویدادی ثبت نشده.'}
+function renderHome(){let avg=db.grades.length?db.grades.reduce((s,x)=>s+Number(x.score),0)/db.grades.length:null;$('avgAll').textContent=avg===null?'—':fa(avg);$('examTotal').textContent=fa(db.exams.filter(x=>countdown(x.date)>=0).length);$('taskOpen').textContent=fa(db.tasks.filter(x=>!x.done).length);$('gradeTotal').textContent=fa(db.grades.length);let names=[...new Set(db.grades.map(x=>x.subject))];$('subjectProgress').innerHTML=names.length?names.map(n=>{let a=db.grades.filter(x=>x.subject===n),v=a.reduce((s,x)=>s+Number(x.score),0)/a.length;return `<div class="subject"><b>${esc(n)}</b><small>میانگین ${fa(v)} از ۲۰</small><div class="bar"><i style="width:${Math.max(0,Math.min(100,v*5))}%"></i></div></div>`}).join(''):'<div class="empty">برای دیدن پیشرفت، نمره ثبت کن.</div>'}
+function renderAll(){let p=db.profile;$('headName').textContent=p.name||'دانش‌آموز';$('headClass').textContent='پایه '+p.cls+(p.room?' · '+p.room:'');$('headYear').textContent='سال تحصیلی '+p.year;renderTT();renderExams();renderGrades();renderTasks();renderCalendar();renderHome()}
+function backup(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download='School-MAMD-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function restoreBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.profile||!Array.isArray(x.grades)||!Array.isArray(x.exams))throw Error();db={...defaults,...x};persist();toast('نسخه پشتیبان بازیابی شد.')}catch{toast('فایل پشتیبان معتبر نیست.')}};r.readAsText(f);e.target.value=''}
+function clearAll(){if(confirm('همه اطلاعات ذخیره‌شده در این مرورگر پاک شود؟')){localStorage.removeItem(KEY);location.reload()}}
+async function enableNotifications(){if(!('Notification'in window))return toast('مرورگر از اعلان پشتیبانی نمی‌کند.');let p=await Notification.requestPermission();toast(p==='granted'?'اعلان مرورگر فعال شد.':'اجازه اعلان داده نشد.');if(p==='granted')new Notification('School MAMD',{body:'اعلان‌ها فعال شدند.'})}
+function applyTheme(){document.documentElement.dataset.theme=db.theme;$('themeBtn').textContent=db.theme==='dark'?'☀️ حالت روشن':'🌙 حالت شب'}
+$('themeBtn').onclick=()=>{db.theme=db.theme==='dark'?'light':'dark';applyTheme();localStorage.setItem(KEY,JSON.stringify(db))};
+$('todayLabel').textContent=new Intl.DateTimeFormat('fa-IR',{dateStyle:'full'}).format(new Date());
+$('pName').value=db.profile.name;$('pClass').value=db.profile.cls;$('pRoom').value=db.profile.room;$('pYear').value=db.profile.year;$('passStatus').value=db.profile.pass;$('passNote').value=db.profile.passNote;
+applyTheme();renderAll();
+if('serviceWorker'in navigator&&location.protocol==='https:')addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
