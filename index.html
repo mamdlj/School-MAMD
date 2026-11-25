@@ -8,6 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 :root{--bg:#f4f6fc;--card:#fff;--text:#172033;--muted:#778198;--line:#e7eaf2;--primary:#6558e8;--soft:#efedff;--green:#159b72;--red:#df555d;--orange:#d88a24;--shadow:0 10px 32px #202b4b0c}
 [data-theme=dark]{--bg:#101522;--card:#192235;--text:#edf1fb;--muted:#a0abc0;--line:#2b354b;--primary:#9288ff;--soft:#292747;--green:#42c69a;--red:#ff777d;--orange:#f2b65c;--shadow:0 10px 32px #0003}
+.auth-gate{position:fixed;inset:0;z-index:100;background:linear-gradient(135deg,#171544,#6558e8);display:grid;place-items:center;padding:18px}.auth-gate[hidden]{display:none!important}.auth-card{width:min(430px,100%);background:#fff;color:#172033;border-radius:22px;padding:24px;box-shadow:0 25px 80px #0005}.auth-card h2{margin:0 0 8px;font-size:20px}.auth-card p{font-size:12px;line-height:2;color:#667085}.auth-card input{margin:7px 0 12px}.auth-card button{width:100%;margin-top:8px}.auth-error{color:#c62828!important;min-height:22px}.auth-card [hidden]{display:none!important}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,sans-serif;transition:.2s}
 button,input,select,textarea{font:inherit}button{cursor:pointer}
 header{background:linear-gradient(120deg,#24205f,#6558e8);color:#fff;padding:22px max(18px,calc((100% - 1180px)/2));}
@@ -30,7 +31,23 @@ footer{text-align:center;color:var(--muted);font-size:10px;padding:18px}
 @media print{header,nav,.no-print,footer{display:none!important}body{background:#fff;color:#111}.wrap{max-width:none;margin:0;padding:0}.page{display:none!important}#grades.page{display:block!important}.panel,.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}}
 </style></head>
 <body>
-<header><div class="top"><div><h1>School MAMD <span style="font-size:12px;opacity:.8">نسخه ۲</span></h1><p>همراه هوشمند درس، امتحان و پیشرفت تحصیلی</p></div><div class="header-actions"><span class="pill" id="todayLabel"></span><button class="btn soft" id="installBtn" type="button">⬇️ نصب / دانلود برنامه</button><button class="btn soft" id="themeBtn">🌙 حالت شب</button></div></div><div class="profileline"><span class="pill" id="headName">دانش‌آموز</span><span class="pill" id="headClass">پایه هشتم</span><span class="pill" id="headYear">۱۴۰۵–۱۴۰۶</span></div></header>
+<div class="auth-gate" id="authGate" hidden>
+ <div class="auth-card">
+  <h2>School MAMD | حساب ابری</h2>
+  <p id="authHelp">برای دسترسی به اطلاعاتت وارد حساب شو.</p>
+  <div id="setupPanel" hidden>
+   <label>کد راه‌اندازی یک‌بارمصرف</label><input id="setupCode" type="password" autocomplete="off" placeholder="کد راه‌اندازی">
+   <label>رمز عبور جدید (حداقل ۱۰ نویسه)</label><input id="newCloudPassword" type="password" autocomplete="new-password" placeholder="یک رمز قوی انتخاب کن">
+   <button class="btn primary" id="setupCloudBtn" type="button">ساخت حساب ابری</button>
+  </div>
+  <div id="loginPanel" hidden>
+   <label>رمز عبور حساب ابری</label><input id="cloudPassword" type="password" autocomplete="current-password" placeholder="رمز عبور">
+   <button class="btn primary" id="cloudLoginBtn" type="button">ورود و دریافت اطلاعات</button>
+  </div>
+  <p class="auth-error" id="authError"></p>
+ </div>
+</div>
+<header><div class="top"><div><h1>School MAMD <span style="font-size:12px;opacity:.8">نسخه ۲</span></h1><p>همراه هوشمند درس، امتحان و پیشرفت تحصیلی</p></div><div class="header-actions"><span class="pill" id="todayLabel"></span><span class="pill" id="cloudStatus">اتصال ابری…</span><button class="btn soft" id="installBtn" type="button">⬇️ نصب / دانلود برنامه</button><button class="btn soft" id="themeBtn">🌙 حالت شب</button></div></div><div class="profileline"><span class="pill" id="headName">دانش‌آموز</span><span class="pill" id="headClass">پایه هشتم</span><span class="pill" id="headYear">۱۴۰۵–۱۴۰۶</span></div></header>
 <main class="wrap">
 <nav id="nav"><button class="active" data-page="home">🏠 خانه</button><button data-page="timetable">📚 برنامه هفتگی</button><button data-page="exams">📝 امتحان‌ها</button><button data-page="grades">📊 نمره و کارنامه</button><button data-page="tasks">✅ تکالیف</button><button data-page="calendar">📅 تقویم</button><button data-page="settings">⚙️ تنظیمات</button></nav>
 <section class="page active" id="home">
@@ -48,7 +65,7 @@ footer{text-align:center;color:var(--muted);font-size:10px;padding:18px}
 <div class="panel"><h2>اعلان‌ها و یادآوری</h2><p class="hint">در صورت پشتیبانی مرورگر، اجازه اعلان را فعال کن. یادآوری خودکار در زمان بسته بودن مرورگر تضمین‌شده نیست.</p><button class="btn soft" onclick="enableNotifications()">فعال‌سازی اعلان مرورگر</button></div>
 <div class="panel"><h2>پشتیبان‌گیری و بازیابی</h2><div class="actions no-print"><button class="btn soft" onclick="backup()">دانلود نسخه پشتیبان</button><label class="btn soft" style="margin:0">بازیابی از فایل<input type="file" accept="application/json" id="restoreFile" hidden onchange="restoreBackup(event)"></label></div><p class="hint">فایل پشتیبان شامل پروفایل، برنامه هفتگی، امتحان‌ها، نمره‌ها و تکالیف است.</p></div>
 <div class="panel"><h2>وضعیت قبولی و نتیجه سال</h2><div class="row"><div><label>وضعیت</label><select id="passStatus" onchange="savePass()"><option>هنوز مشخص نیست</option><option>قبول شدم</option><option>نیاز به تلاش بیشتر / تجدید</option></select></div><div><label>یادداشت</label><input id="passNote" placeholder="یادداشت شخصی" onchange="savePass()"></div></div></div>
-<div class="panel"><h2>حریم خصوصی و ذخیره‌سازی</h2><p class="hint">این نسخه اطلاعات را روی همین مرورگر و دستگاه ذخیره می‌کند. ورود چنددستگاهی و همگام‌سازی ابری واقعی هنوز فعال نیست و برای آن باید سرویس امن و تنظیمات اختصاصی مالک پروژه اضافه شود. برای جابه‌جایی دستگاه از نسخه پشتیبان استفاده کن.</p><button class="btn danger" onclick="clearAll()">پاک‌کردن همه اطلاعات این دستگاه</button></div></section>
+<div class="panel"><h2>حریم خصوصی و ذخیره‌سازی</h2><p class="hint">این نسخه اطلاعات را روی همین مرورگر و دستگاه ذخیره می‌کند. ورود چنددستگاهی و همگام‌سازی ابری واقعی هنوز فعال نیست و برای آن باید سرویس امن و تنظیمات اختصاصی مالک پروژه اضافه شود. برای جابه‌جایی دستگاه از نسخه پشتیبان استفاده کن.</p><div class="actions"><button class="btn soft" onclick="cloudLogout()">خروج از حساب ابری</button><button class="btn danger" onclick="clearAll()">پاک‌کردن همه اطلاعات این دستگاه</button></div></div></section>
 <footer>School MAMD v2 · ساخته‌شده برای برنامه‌ریزی بهتر</footer></main><div id="toast"></div>
 <script>
 const KEY='school_mamd_v2';
@@ -58,7 +75,54 @@ db={...defaults,...db,profile:{...defaults.profile,...(db.profile||{})},timetabl
 const $=id=>document.getElementById(id), fa=n=>new Intl.NumberFormat('fa-IR',{maximumFractionDigits:2}).format(n);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const days=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(db));renderAll();}catch(err){console.error('School MAMD storage error:',err);toast('ذخیره‌سازی مرورگر مسدود است؛ تنظیمات حریم خصوصی را بررسی کن.');}}
+const API_BASE="https://school-mamd-api.hesabi-school-portal.workers.dev";
+let cloudToken=localStorage.getItem('school_mamd_cloud_token')||'';
+let cloudQueue=Promise.resolve();
+function setCloudStatus(message){const el=$('cloudStatus');if(el)el.textContent=message;}
+function cloudGate(mode,message=''){
+ $('authGate').hidden=false;$('setupPanel').hidden=mode!=='setup';$('loginPanel').hidden=mode!=='login';
+ $('authHelp').textContent=mode==='setup'?'برای ساخت حساب، کد یک‌بارمصرف و رمز دلخواهت را وارد کن.':'برای دریافت اطلاعاتت از فضای ابری وارد شو.';
+ $('authError').textContent=message;setCloudStatus('ورود لازم است');
+}
+async function apiCall(path,options={}){
+ const response=await fetch(API_BASE+path,{...options,headers:{'Content-Type':'application/json',...(options.headers||{})}});
+ let data={};try{data=await response.json()}catch{}
+ if(!response.ok)throw new Error(data.error||'ارتباط با سرور برقرار نشد.');
+ return data;
+}
+async function saveCloudNow(){
+ if(!cloudToken)return;
+ try{await apiCall('/api/data',{method:'PUT',headers:{Authorization:'Bearer '+cloudToken},body:JSON.stringify(db)});setCloudStatus('☁️ ذخیره شد');}
+ catch(err){if(err.message.includes('دوباره وارد')){localStorage.removeItem('school_mamd_cloud_token');cloudToken='';cloudGate('login',err.message);}else{setCloudStatus('خطا در همگام‌سازی');console.error(err);}}
+}
+function persist(){
+ try{localStorage.setItem(KEY,JSON.stringify(db));renderAll();}
+ catch(err){console.error(err);toast('ذخیره‌سازی مرورگر مسدود است.');}
+ if(cloudToken){setCloudStatus('در حال ذخیره…');cloudQueue=cloudQueue.then(saveCloudNow).catch(console.error);}
+}
+async function finishCloudLogin(token){
+ cloudToken=token;localStorage.setItem('school_mamd_cloud_token',token);
+ const result=await apiCall('/api/data',{headers:{Authorization:'Bearer '+token}});
+ if(result.data){const x=result.data;db={...defaults,...x,profile:{...defaults.profile,...(x.profile||{})},timetable:x.timetable||[],exams:x.exams||[],grades:x.grades||[],tasks:x.tasks||[]};localStorage.setItem(KEY,JSON.stringify(db));}
+ else await apiCall('/api/data',{method:'PUT',headers:{Authorization:'Bearer '+token},body:JSON.stringify(db)});
+ $('authGate').hidden=true;renderAll();setCloudStatus('☁️ متصل و همگام');
+}
+async function initCloudSync(){
+ setCloudStatus('در حال اتصال…');
+ try{const status=await apiCall('/api/status');if(cloudToken){try{await finishCloudLogin(cloudToken);return;}catch(e){localStorage.removeItem('school_mamd_cloud_token');cloudToken='';}}
+ cloudGate(status.initialized?'login':'setup');
+ }catch(e){setCloudStatus('بدون اتصال');cloudGate('login','ارتباط با سرور برقرار نشد؛ اینترنت را بررسی و دوباره بارگذاری کن.');}
+}
+$('setupCloudBtn').onclick=async()=>{
+ try{await apiCall('/api/setup',{method:'POST',body:JSON.stringify({setupKey:$('setupCode').value.trim(),password:$('newCloudPassword').value})});$('setupPanel').hidden=true;$('loginPanel').hidden=false;$('authHelp').textContent='حساب ساخته شد؛ حالا با رمز انتخابی وارد شو.';$('cloudPassword').value=$('newCloudPassword').value;$('authError').textContent='حساب ساخته شد.';}
+ catch(e){$('authError').textContent=e.message;}
+};
+$('cloudLoginBtn').onclick=async()=>{
+ try{const result=await apiCall('/api/login',{method:'POST',body:JSON.stringify({password:$('cloudPassword').value})});await finishCloudLogin(result.token);}
+ catch(e){$('authError').textContent=e.message;}
+};
+function cloudLogout(){localStorage.removeItem('school_mamd_cloud_token');cloudToken='';cloudGate('login','از حساب ابری خارج شدی.');}
+
 function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2300)}
 function todayISO(){let d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
 function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id))}
@@ -88,7 +152,7 @@ function applyTheme(){document.documentElement.dataset.theme=db.theme;$('themeBt
 $('themeBtn').onclick=()=>{db.theme=db.theme==='dark'?'light':'dark';applyTheme();localStorage.setItem(KEY,JSON.stringify(db))};
 $('todayLabel').textContent=new Intl.DateTimeFormat('fa-IR',{dateStyle:'full'}).format(new Date());
 $('pName').value=db.profile.name;$('pClass').value=db.profile.cls;$('pRoom').value=db.profile.room;$('pYear').value=db.profile.year;$('passStatus').value=db.profile.pass;$('passNote').value=db.profile.passNote;
-applyTheme();renderAll();
+applyTheme();renderAll();initCloudSync();
 let deferredInstallPrompt=null;
 const installButton=$('installBtn');
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;installButton.textContent='⬇️ نصب برنامه';});
