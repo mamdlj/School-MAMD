@@ -30,7 +30,7 @@ footer{text-align:center;color:var(--muted);font-size:10px;padding:18px}
 @media print{header,nav,.no-print,footer{display:none!important}body{background:#fff;color:#111}.wrap{max-width:none;margin:0;padding:0}.page{display:none!important}#grades.page{display:block!important}.panel,.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}}
 </style></head>
 <body>
-<header><div class="top"><div><h1>School MAMD <span style="font-size:12px;opacity:.8">نسخه ۲</span></h1><p>همراه هوشمند درس، امتحان و پیشرفت تحصیلی</p></div><div class="header-actions"><span class="pill" id="todayLabel"></span><button class="btn soft" id="themeBtn">🌙 حالت شب</button></div></div><div class="profileline"><span class="pill" id="headName">دانش‌آموز</span><span class="pill" id="headClass">پایه هشتم</span><span class="pill" id="headYear">۱۴۰۵–۱۴۰۶</span></div></header>
+<header><div class="top"><div><h1>School MAMD <span style="font-size:12px;opacity:.8">نسخه ۲</span></h1><p>همراه هوشمند درس، امتحان و پیشرفت تحصیلی</p></div><div class="header-actions"><span class="pill" id="todayLabel"></span><button class="btn soft" id="installBtn" type="button">⬇️ نصب / دانلود برنامه</button><button class="btn soft" id="themeBtn">🌙 حالت شب</button></div></div><div class="profileline"><span class="pill" id="headName">دانش‌آموز</span><span class="pill" id="headClass">پایه هشتم</span><span class="pill" id="headYear">۱۴۰۵–۱۴۰۶</span></div></header>
 <main class="wrap">
 <nav id="nav"><button class="active" data-page="home">🏠 خانه</button><button data-page="timetable">📚 برنامه هفتگی</button><button data-page="exams">📝 امتحان‌ها</button><button data-page="grades">📊 نمره و کارنامه</button><button data-page="tasks">✅ تکالیف</button><button data-page="calendar">📅 تقویم</button><button data-page="settings">⚙️ تنظیمات</button></nav>
 <section class="page active" id="home">
@@ -58,7 +58,7 @@ db={...defaults,...db,profile:{...defaults.profile,...(db.profile||{})},timetabl
 const $=id=>document.getElementById(id), fa=n=>new Intl.NumberFormat('fa-IR',{maximumFractionDigits:2}).format(n);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const days=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
-function persist(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(db));renderAll();}catch(err){console.error('School MAMD storage error:',err);toast('ذخیره‌سازی مرورگر مسدود است؛ تنظیمات حریم خصوصی را بررسی کن.');}}
 function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2300)}
 function todayISO(){let d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
 function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id))}
@@ -89,5 +89,19 @@ $('themeBtn').onclick=()=>{db.theme=db.theme==='dark'?'light':'dark';applyTheme(
 $('todayLabel').textContent=new Intl.DateTimeFormat('fa-IR',{dateStyle:'full'}).format(new Date());
 $('pName').value=db.profile.name;$('pClass').value=db.profile.cls;$('pRoom').value=db.profile.room;$('pYear').value=db.profile.year;$('passStatus').value=db.profile.pass;$('passNote').value=db.profile.passNote;
 applyTheme();renderAll();
+let deferredInstallPrompt=null;
+const installButton=$('installBtn');
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;installButton.textContent='⬇️ نصب برنامه';});
+installButton.addEventListener('click',async()=>{
+ if(deferredInstallPrompt){
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt=null;
+ }else{
+  toast('در Chrome: منوی سه‌نقطه را باز کن و گزینه Install app یا نصب برنامه را بزن.');
+ }
+});
+window.addEventListener('appinstalled',()=>toast('برنامه با موفقیت نصب شد.'));
+try{const testKey='__school_mamd_storage_test__';localStorage.setItem(testKey,'1');localStorage.removeItem(testKey);}catch(err){setTimeout(()=>toast('مرورگر اجازه ذخیره اطلاعات را نمی‌دهد؛ تنظیمات سایت را بررسی کن.'),700);}
 if('serviceWorker'in navigator&&location.protocol==='https:')addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 </script></body></html>
